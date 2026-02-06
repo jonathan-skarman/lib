@@ -1,6 +1,6 @@
 pyproject.toml
-calculus/__init__.py
-calculus/calculus.py
+mylib/__init__.py
+mylib/calculus.py
 mylib.egg-info/PKG-INFO
 mylib.egg-info/SOURCES.txt
 mylib.egg-info/dependency_links.txt
