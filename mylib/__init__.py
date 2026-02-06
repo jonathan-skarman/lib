@@ -1,3 +1,3 @@
 
 from .calculus import *
-from.linalg import *
+from .linalg import *

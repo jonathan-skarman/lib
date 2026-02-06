@@ -26,3 +26,33 @@ def backsub(U,bs):
   for i in reversed(range(n)):
     xs[i] = (bs[i] - U[i,i+1:]@xs[i+1:])/U[i,i]
   return xs
+
+def ludec(A):
+  """
+  Performs LU decomposition of a square matrix A into a lower triangular matrix L and an upper triangular matrix U such that A=LU.
+  
+  :param A: Square matrix to decompose
+  """
+  import numpy as np
+  n = A.shape[0]
+  U = np.array(A, dtype=float)
+  L = np.identity(n, dtype=float)
+  
+  for j in range(n-1):
+    for i in range(j+1,n):
+      coeff = U[i,j]/U[j,j]
+      U[i,j:] -= coeff*U[j,j:]
+      L[i,j] = coeff
+  return L, U
+
+def lusolve(A,bs):
+  """
+  Solves a linear system Ax=bs using LU decomposition.
+  
+  :param A: Coefficient matrix
+  :param bs: constant vector
+  """
+  L, U = ludec(A)
+  ys = forsub(L,bs)
+  xs = backsub(U,ys)
+  return xs
