@@ -89,12 +89,14 @@ def qrdec(A):
 		Q[:,j] = Ap[:,j]/R[j,j]
 	return Q, R
 
-def qrmet(inA,kmax=100):
+def qrmet(inA, kmax=100):
 	import numpy as np
-	A = np.copy(inA)
-	for k in range(1,kmax):
+	A = np.copy(inA).astype(float)
+	n = A.shape[0]
+	V = np.eye(n)
+	for k in range(kmax):
 		Q, R = qrdec(A)
-		A = R@Q
-#		print(k, np.diag(A))
+		A = R @ Q
+		V = V @ Q
 	qreigvals = np.diag(A)
-	return qreigvals
+	return qreigvals, V
